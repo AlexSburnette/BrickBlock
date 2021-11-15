@@ -1,4 +1,11 @@
-
+/*
+ * CSC-251 and CTS 285
+ * Brick Block
+ * In Collaberation of Brandon Alder, Nicholas Baxley, and Alexander Burnette
+ * Version 8
+ * Working on the main part of the project to where the user can buy the bricks.
+ * Started on Oct 18, 2021 Updated on Nov 15, 2021
+ */
 package project;
 import java.util.Scanner;
 import java.io.*;
