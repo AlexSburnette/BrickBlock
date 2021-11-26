@@ -2,6 +2,7 @@ package project;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 // This class will hold a collections of all bricks for a store, to access a 
 // a brick you will need to type Store.get(bricks).get(brickIndex)

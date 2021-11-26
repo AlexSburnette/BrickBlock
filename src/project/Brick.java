@@ -66,13 +66,11 @@ public class Brick {
         return (costPerBrick * 100) * pallets;
     }
     
-    public void getInfo()
+    public String getInfo()
     {
-        System.out.printf("%-21s",name);
-        System.out.printf("%-7s ",type);
-        System.out.printf("%5sin. x ",length);
-        System.out.printf("%5sin.",height);
-        System.out.printf(" $%.2f",costPerBrick);
-        System.out.println();
+        return String.format("\n%-40s%8s%11sin. x %8sin.$%.2f",name,type,length,height,costPerBrick);
     }
 }   
+
+
+// "\n%-40s%-8s%11sin. x %8sin.$%.2f",name,type,length,height,costPerBrick
