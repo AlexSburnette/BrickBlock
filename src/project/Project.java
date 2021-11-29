@@ -41,7 +41,11 @@ public class Project {
         boolean loop = true;
         String menu = ("1. Places to buy bricks"
                    + "\n2. Quotes"
+<<<<<<< HEAD
                    + "\n3. Real Deal"
+=======
+                   + "\n3. Purchase"
+>>>>>>> Alex-update
                    + "\n4. Exit");
         
         if (!WELCOMED){
@@ -531,7 +535,11 @@ public class Project {
         double overage = bricksNeeded * .1;
         
         
+<<<<<<< HEAD
         JOptionPane.showMessageDialog(null,"You will need " + (bricksNeeded + overage) 
+=======
+        JOptionPane.showMessageDialog(null,"You will need " + (int)(bricksNeeded + overage) 
+>>>>>>> Alex-update
                 + " bricks for the project, including 10% overage for damaged bricks.");
         return (int)(overage + bricksNeeded);
     }
