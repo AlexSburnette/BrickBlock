@@ -35,7 +35,7 @@ public class BrickStore {
             if(currentBrick.type.equals(brickType))
             {
                 System.out.printf("%s. ", (index++));
-                currentBrick.getInfo();
+                System.out.println(currentBrick.getInfo());
             }
         }
         System.out.println();
@@ -51,15 +51,15 @@ public class BrickStore {
         {
             if(brickType == "Brick")
             {
-                cart.setBrick(bricks.get(Integer.parseInt(selection) - 1)); 
+                cart.brick = (bricks.get(Integer.parseInt(selection) - 1)); 
             }
             else if(brickType == "Veneer")
             {
-                cart.setBrick(bricks.get(Integer.parseInt(selection) + 1)); 
+                cart.brick = (bricks.get(Integer.parseInt(selection) + 1)); 
             }
             else
             {
-                cart.setBrick(bricks.get(Integer.parseInt(selection) + 3)); 
+                cart.brick = (bricks.get(Integer.parseInt(selection) + 3)); 
             }
         }
         else
