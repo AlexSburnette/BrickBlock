@@ -46,20 +46,20 @@ public class BrickStore {
     {
         Scanner scnr = new Scanner(System.in);
         String selection = JOptionPane.showInputDialog("Which one would you like to purchase?");
-         // TODO - more validation 
+        // TODO - more validation 
         if(Integer.parseInt(selection) == 1 || Integer.parseInt(selection) == 2)
         {
             if(brickType == "Brick")
             {
-                cart.setBrick(bricks.get(Integer.parseInt(selection) - 1)); 
+                cart.brick = (bricks.get(Integer.parseInt(selection) - 1)); 
             }
             else if(brickType == "Veneer")
             {
-                cart.setBrick(bricks.get(Integer.parseInt(selection) + 1)); 
+                cart.brick = (bricks.get(Integer.parseInt(selection) + 1)); 
             }
             else
             {
-                cart.setBrick(bricks.get(Integer.parseInt(selection) + 3)); 
+                cart.brick = (bricks.get(Integer.parseInt(selection) + 3)); 
             }
         }
         else
