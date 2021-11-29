@@ -523,6 +523,14 @@ public class Project {
                         + "\n2. Veneers"
                         + "\n3. Pavers"
                         + "\n4. Go back");
+                switch (answer)
+                {
+                    case "1":
+                        STORES.get(1).printBrickByType("Brick");
+                        STORES.get(1).getBrickSelectionInput(cart, "Brick");
+                        break;
+                }
+                break;
                 //needs more infor
                 case "2":
                 JOptionPane.showMessageDialog(null,"You have chosen Home Depot for your order");
@@ -532,9 +540,25 @@ public class Project {
                         + "\n1. Bricks"
                         + "\n2. Veneers"
                         + "\n3. Pavers"
-                        + "\n4. Go back");
-        }
+                        + "\n4. Go back");  
+                switch(answer)
+                {
+                    
+                }
                 //needs more info
+                JOptionPane.showMessageDialog(null,"You have chosen The Buildclub for your brick order");
+                //customerBricks = BUILD;
+                answer = JOptionPane.showInputDialog(""
+                        + "What would you like to order"
+                        + "\n1. Bricks"
+                        + "\n2. Veneers"
+                        + "\n3. Pavers"
+                        + "\n4. Go back");
+                switch(answer)
+                {
+                    
+                }
+        }
         // copy and paste brick, veneer, and pavers
         //copy and paste selections
         // ask for wall measurements
