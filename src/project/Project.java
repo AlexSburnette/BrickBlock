@@ -8,12 +8,15 @@
  */
 
 package project;
+import java.awt.Color;
 import java.util.Scanner;
-import java.io.*;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class Project {
     
@@ -23,6 +26,8 @@ public class Project {
     final static String PATTERN1 = "==============================";
     final static String PATTERN2 = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     final static double SALES_TAX = 0.07;
+    final static JFrame FRAME = new JFrame();
+    static boolean WELCOMED = false;
     static String customerName;
     
     public static void main(String[] args)
@@ -36,10 +41,13 @@ public class Project {
         boolean loop = true;
         String menu = ("1. Places to buy bricks"
                    + "\n2. Quotes"
-                   + "\n3. Real Deal"
+                   + "\n3. Purchase"
                    + "\n4. Exit");
         
-        JOptionPane.showMessageDialog(null,"\nWelcome to Brick Block.");
+        if (!WELCOMED){
+            JOptionPane.showMessageDialog(null,"\nWelcome to Brick Block.");
+            WELCOMED = true;
+        }
         
         while(loop)
         {
@@ -65,16 +73,13 @@ public class Project {
                     real(); 
                     break;
                 case "4":
-                    loop = false;
-                    JOptionPane.showMessageDialog(null,"Have a nice day!!");
-                    break;
+                    exitDialog();
                 default:
                     JOptionPane.showMessageDialog(null,"Please choose between 1 - 4.");
                     break;
             }
         }
-        
-        
+            
     }
     public static void type(){
         Scanner scnr = new Scanner(System.in);
@@ -106,6 +111,7 @@ public class Project {
                     break;
                 case "4":
                     loop = false;
+                    FRAME.setVisible(false);
                     menu();
                     break;
                 default:
@@ -115,21 +121,43 @@ public class Project {
             
             if (storeIndex != -1)
             {
-                BrickStore selectedStore = STORES.get(storeIndex);
-                //Needs Joption
-                System.out.println("\nBelow are the prices for all bricks at " 
-                                   + selectedStore.name);
-                System.out.printf("%-21s","Name");
-                System.out.printf("%-8s","Type");
-                System.out.printf("%-11s","Length");
-                System.out.printf("%-8s","Height");
-                System.out.print("Cost Per Brick");
-                System.out.println("\n" + PATTERN2 + PATTERN2);
+                BrickStore selectedStore = STORES.get(storeIndex);  
+                int[] bounds = {100, 100, 700, 500};
+                
+                //Building model for the table
+                DefaultTableModel model = new DefaultTableModel();
+                Object[] col = {"Brick Name", "Type", "Length", "Height", "Cost Per Brick"};
+                model.setColumnIdentifiers(col);
                 for (int brickIndex = 0; brickIndex < selectedStore.bricks.size(); brickIndex++)
                 {
                     Brick currentBrick = selectedStore.bricks.get(brickIndex);
-                    currentBrick.getInfo();
+                    model.addRow(new Object[]{currentBrick.name, currentBrick.type, currentBrick.length, currentBrick.height, String.format("$%.2f", currentBrick.costPerBrick)});  
                 }  
+          
+                //Building table for the pane
+                JTable table = new JTable();
+                table.setModel(model);
+                table.setRowHeight(30);
+                table.setAutoCreateRowSorter(true);
+                table.setFillsViewportHeight(true);
+                
+                //Building pane for the window frame
+                JScrollPane pane = new JScrollPane(table);
+                pane.setForeground(Color.red);
+                pane.setBackground(Color.white);
+                pane.setBounds(0, 0, bounds[2], bounds[3]);
+
+
+                
+                //Creating window frame
+                FRAME.setTitle("Bricks in stock at " + selectedStore.name);
+                FRAME.getContentPane().setBackground(Color.gray);
+                FRAME.setBounds(bounds[0], bounds[1], bounds[2], bounds[3]);
+                FRAME.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                FRAME.getContentPane().setLayout(null);
+                FRAME.setVisible(true);
+                FRAME.getContentPane().add(pane);
+          
             }        
         }
     }
@@ -499,11 +527,11 @@ public class Project {
         double wallsInInches = 2813; 
         
         double normalPatternBricks = (wallsInInches * standardPatternHeight) / ((brick.length + .5) * (brick.height+.5));
-        double bricksNeeded = normalPatternBricks + (wallsInInches * patternHeight) / ((brick.length + .5) * (brick.width + .5));
-        double overage = bricksNeeded * .1;
+        int bricksNeeded = (int) (normalPatternBricks + (wallsInInches * patternHeight) / ((brick.length + .5) * (brick.width + .5)));
+        double overage = Math.round(bricksNeeded * .1);
         
         
-        JOptionPane.showMessageDialog(null,"You will need " + (bricksNeeded + overage) 
+        JOptionPane.showMessageDialog(null,"You will need " + (int)(bricksNeeded + overage) 
                 + " bricks for the project, including 10% overage for damaged bricks.");
         return (int)(overage + bricksNeeded);
     }

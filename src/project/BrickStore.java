@@ -45,8 +45,8 @@ public class BrickStore {
     public void getBrickSelectionInput(Purchase cart, String brickType)
     {
         Scanner scnr = new Scanner(System.in);
-        System.out.println("Which one would you like to purchase?");
-        String selection = scnr.next(); // TODO - more validation 
+        String selection = JOptionPane.showInputDialog("Which one would you like to purchase?");
+         // TODO - more validation 
         if(Integer.parseInt(selection) == 1 || Integer.parseInt(selection) == 2)
         {
             if(brickType == "Brick")
