@@ -326,7 +326,7 @@ public class Project {
         //Brick customerBricks;
         Purchase cart = new Purchase();
         getCustomerName();
-        cart.setCustomerName(customerName);
+        cart.customerName = customerName;
         
         choices = JOptionPane.showInputDialog(null, menu, "Store Picker", JOptionPane.QUESTION_MESSAGE);
         if(choices == null)
@@ -357,7 +357,7 @@ public class Project {
                         STORES.get(1).printBrickByType("Brick");
                         STORES.get(1).getBrickSelectionInput(cart, "Brick");
                         // Gets number of bricks needed and adds to cart
-                        cart.setQuantity(getBricksNeeded(cart.getBrick()));
+                        cart.quantity = getBricksNeeded(cart.brick);
                         // Displays receipt and prints to file
                         JOptionPane.showMessageDialog(null,cart.createReceipt());
                         cart.printReceipt();
@@ -366,7 +366,7 @@ public class Project {
                         JOptionPane.showMessageDialog(null,"You have chosen veeners");
                         STORES.get(1).printBrickByType("Veneer");
                         STORES.get(1).getBrickSelectionInput(cart, "Veneer");
-                        cart.setQuantity(getBricksNeeded(cart.getBrick()));
+                        cart.quantity = getBricksNeeded(cart.brick);
                         JOptionPane.showMessageDialog(null,cart.createReceipt());
                         cart.printReceipt();
                         break;
@@ -375,7 +375,7 @@ public class Project {
                         JOptionPane.showMessageDialog(null,"You have chosen pavers");
                         STORES.get(1).printBrickByType("Paver");
                         STORES.get(1).getBrickSelectionInput(cart, "Paver");
-                        cart.setQuantity(getBricksNeeded(cart.getBrick()));
+                        cart.quantity = getBricksNeeded(cart.brick);
                         JOptionPane.showMessageDialog(null,cart.createReceipt());
                         cart.printReceipt();
                         break;
@@ -406,7 +406,7 @@ public class Project {
                         STORES.get(0).getBrickSelectionInput(cart, "Brick");
                             
                         // Gets number of bricks needed and adds to cart
-                        cart.setQuantity(getBricksNeeded(cart.getBrick()));
+                        cart.quantity = getBricksNeeded(cart.brick);
                         JOptionPane.showMessageDialog(null,cart.createReceipt());
                         cart.printReceipt();
                         break;
@@ -414,7 +414,7 @@ public class Project {
                         JOptionPane.showMessageDialog(null,"You have chosen veeners");
                         STORES.get(0).printBrickByType("Veneer");
                         STORES.get(0).getBrickSelectionInput(cart, "Veneer");
-                        cart.setQuantity(getBricksNeeded(cart.getBrick()));
+                        cart.quantity = getBricksNeeded(cart.brick);
                         JOptionPane.showMessageDialog(null,cart.createReceipt());
                         cart.printReceipt();
                         break;
@@ -422,7 +422,7 @@ public class Project {
                         JOptionPane.showMessageDialog(null,"You have chosen pavers");
                         STORES.get(0).printBrickByType("Paver");
                         STORES.get(0).getBrickSelectionInput(cart, "Paver");
-                        cart.setQuantity(getBricksNeeded(cart.getBrick()));
+                        cart.quantity = getBricksNeeded(cart.brick);
                         JOptionPane.showMessageDialog(null,cart.createReceipt());
                         cart.printReceipt();
                         break;
@@ -450,7 +450,7 @@ public class Project {
                                 + "You have chosen bricks");
                         STORES.get(2).printBrickByType("Brick");
                         STORES.get(2).getBrickSelectionInput(cart, "Brick");
-                        cart.setQuantity(getBricksNeeded(cart.getBrick()));
+                        cart.quantity = getBricksNeeded(cart.brick);
                         JOptionPane.showMessageDialog(null,cart.createReceipt());
                         cart.printReceipt();
                         break;
@@ -458,7 +458,7 @@ public class Project {
                         JOptionPane.showMessageDialog(null,"You have chosen veeners");
                         STORES.get(2).printBrickByType("Veneer");
                         STORES.get(2).getBrickSelectionInput(cart, "Veneer");
-                        cart.setQuantity(getBricksNeeded(cart.getBrick()));
+                        cart.quantity = getBricksNeeded(cart.brick);
                         JOptionPane.showMessageDialog(null,cart.createReceipt());
                         cart.printReceipt();
                         break;
@@ -466,7 +466,7 @@ public class Project {
                         JOptionPane.showMessageDialog(null,"You have chosen pavers");
                         STORES.get(2).printBrickByType("Paver");
                         STORES.get(2).getBrickSelectionInput(cart, "Paver");
-                        cart.setQuantity(getBricksNeeded(cart.getBrick()));
+                        cart.quantity = getBricksNeeded(cart.brick);
                         JOptionPane.showMessageDialog(null,cart.createReceipt());
                         cart.printReceipt();
                         break;

@@ -1,4 +1,3 @@
-// Purchase/shopping cart
 package project;
 
 import java.io.FileNotFoundException;
@@ -7,10 +6,10 @@ import java.text.DecimalFormat;
 
 public class Purchase {
     final private double TAX_RATE = .07;
-    private String customerName;
-    private Brick brick;
-    private Integer quantity;
-    private double purchaseTotal;
+    public String customerName;
+    public Brick brick;
+    public Integer quantity;
+    public double purchaseTotal;
     
     public Purchase()
     {
@@ -32,39 +31,6 @@ public class Purchase {
         this.customerName = customerName;
         this.quantity = quantity;
         this.purchaseTotal = purchaseTotal;
-    }
-    
-    public void setCustomerName(String customerName)
-    {
-        this.customerName = customerName;
-    }
-    public String getCustomerName()
-    {
-        return customerName;
-    }
-    public void setBrick(Brick brick)
-    {
-        this.brick = brick;
-    }
-    public Brick getBrick()
-    {
-        return brick;
-    }
-    public void setQuantity(Integer quantity)
-    {
-        this.quantity = quantity;
-    }
-    public Integer getQuantity()
-    {
-        return quantity;
-    }
-    public void setTotal(double purchaseTotal)
-    {
-        this.purchaseTotal = purchaseTotal;
-    }
-    public double getTotal()
-    {
-        return purchaseTotal;
     }
     
     // Writes receipt to file
@@ -106,6 +72,5 @@ public class Purchase {
                 + "Total: " + format.format(tax + purchaseTotal);
         return bill;
     }
-    
-    
+     
 }
