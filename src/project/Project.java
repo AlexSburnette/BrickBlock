@@ -41,8 +41,9 @@ public class Project {
         boolean loop = true;
         String menu = ("1. Places to buy bricks"
                    + "\n2. Quotes"
-                   + "\n3. Purchase"
-                   + "\n4. Exit");
+                   + "\n3. Project"
+                   + "\n4. Custom Build"              
+                   + "\n5. Exit");
         
         if (!WELCOMED){
             JOptionPane.showMessageDialog(null,"\nWelcome to Brick Block.");
@@ -73,6 +74,10 @@ public class Project {
                     real(); 
                     break;
                 case "4":
+                    loop = false;
+                    customOrders();
+                    break;
+                case "5":
                     exitDialog();
                 default:
                     JOptionPane.showMessageDialog(null,"Please choose between 1 - 4.");
@@ -486,7 +491,58 @@ public class Project {
         }
          
     }   
-    
+    public static void customOrders()
+    {
+         Scanner scnr = new Scanner(System.in);
+        String choices;
+        String answer;
+        String menu = "Where would you like to get your order from?"
+                    + "\n1. Lowes"
+                    + "\n2. Home Depot"
+                    + "\n3. The Buildclub"
+                    + "\n4. Main Menu";
+        //Brick customerBricks;
+        Purchase cart = new Purchase();
+        getCustomerName();
+        cart.customerName = customerName;
+        
+        choices = JOptionPane.showInputDialog(null, menu, "Store Picker", JOptionPane.QUESTION_MESSAGE);
+        if(choices == null)
+        {
+            exitDialog();
+            real();
+        }
+        switch(choices)
+        {
+            case "1":
+                JOptionPane.showMessageDialog(null,"You have chosen Lowes for your order");
+                //customerBricks = LOWES;
+                answer = JOptionPane.showInputDialog(""
+                        + "What would you like to order"
+                        + "\n1. Bricks"
+                        + "\n2. Veneers"
+                        + "\n3. Pavers"
+                        + "\n4. Go back");
+                //needs more infor
+                case "2":
+                JOptionPane.showMessageDialog(null,"You have chosen Home Depot for your order");
+                //customerBricks = HOME;
+                answer = JOptionPane.showInputDialog(""
+                        + "What would you like to order"
+                        + "\n1. Bricks"
+                        + "\n2. Veneers"
+                        + "\n3. Pavers"
+                        + "\n4. Go back");
+                //needs more info
+        // copy and paste brick, veneer, and pavers
+        //copy and paste selections
+        // ask for wall measurements
+        // add how many doors (double doors count as two doors)
+        //ask how many windows (use standard size windows 24X36)
+        // add doors and windows then use wall measurements to subtract
+        //multiply with selection
+        //print receipt
+    }
     public static void getCustomerName()
     {
         Scanner keyboard = new Scanner(System.in);
