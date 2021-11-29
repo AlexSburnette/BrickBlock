@@ -493,7 +493,7 @@ public class Project {
     }   
     public static void customOrders()
     {
-         Scanner scnr = new Scanner(System.in);
+        Scanner scnr = new Scanner(System.in);
         String choices;
         String answer;
         String menu = "Where would you like to get your order from?"
@@ -533,6 +533,7 @@ public class Project {
                         + "\n2. Veneers"
                         + "\n3. Pavers"
                         + "\n4. Go back");
+        }
                 //needs more info
         // copy and paste brick, veneer, and pavers
         //copy and paste selections
