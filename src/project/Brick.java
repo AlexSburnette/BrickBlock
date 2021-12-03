@@ -71,6 +71,3 @@ public class Brick {
         return String.format("\n%-40s%8s%11sin. x %8sin.$%.2f",name,type,length,height,costPerBrick);
     }
 }   
-
-
-// "\n%-40s%-8s%11sin. x %8sin.$%.2f",name,type,length,height,costPerBrick
