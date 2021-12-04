@@ -2,39 +2,37 @@
  * CSC-251 and CTS 285
  * Brick Block
  * In Collaberation of Brandon Alder, Nicholas Baxley, and Alexander Burnette
- * Version 9
- * Working on the main part of the project to where the user can buy the bricks.
- * Started on Oct 18, 2021 Updated on Nov 19, 2021
+ * Version 13
+ * Fixing validation issues in real and custom section.
+ * Started on Oct 18, 2021 Updated on Dec 4, 2021
  */
 
 package project;
-import java.awt.Color;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 public class Project {
-    
     // STORES.get(0) = Home Depot, STORES.get(1) = Lowes, STORES.get(2) = BuildClub
-    // STORES.get(0).bricks.get(0) First brick in Home Depot, STORES.get(0).bricks.get(1) Second brick in Home Depot, etc...
+    // STORES.get(0).bricks.get(0) First brick in Home Depot, 
+    // STORES.get(0).bricks.get(1) Second brick in Home Depot, etc...\
+    
+    // <editor-fold defaultstate="collapsed" desc="Global Vars">
     final static List<BrickStore> STORES = createStores();
     final static String PATTERN1 = "==============================";
     final static String PATTERN2 = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     final static double SALES_TAX = 0.07;
-    final static JFrame FRAME = new JFrame();
     static boolean WELCOMED = false;
-    static String customerName;
-    
+    static String customerName = "";
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Main">
     public static void main(String[] args)
     {
         menu();
     }
-    
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Menu">
     public static void menu(){
         Scanner scnr = new Scanner(System.in); 
         String choice;
@@ -52,7 +50,8 @@ public class Project {
         
         while(loop)
         {
-            choice = JOptionPane.showInputDialog(null, menu, "Main Menu", JOptionPane.QUESTION_MESSAGE);
+            choice = JOptionPane.showInputDialog(null, menu, "Main Menu", 
+                                                 JOptionPane.QUESTION_MESSAGE);
             if(choice == null)
             {
                 exitDialog();
@@ -80,12 +79,15 @@ public class Project {
                 case "5":
                     exitDialog();
                 default:
-                    JOptionPane.showMessageDialog(null,"Please choose between 1 - 4.");
+                    JOptionPane.showMessageDialog(null,
+                                                "Please choose between 1 - 5.");
                     break;
             }
         }
             
     }
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Type Method">
     public static void type(){
         Table allBricks = new Table();
         boolean loop = true;
@@ -96,7 +98,8 @@ public class Project {
                   + "\n4. Exit";
         
         while(loop){
-            String choice = JOptionPane.showInputDialog(null, menu, "Pick a store.", JOptionPane.QUESTION_MESSAGE);
+            String choice = JOptionPane.showInputDialog(null, menu, 
+                                "Pick a store.", JOptionPane.QUESTION_MESSAGE);
             if(choice == null)
             {
                 exitDialog();
@@ -122,7 +125,8 @@ public class Project {
                     menu();
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null,"Please choose between 1 - 4.");
+                    JOptionPane.showMessageDialog(null,
+                                                "Please choose between 1 - 4.");
                     break;
             }  
             
@@ -137,18 +141,21 @@ public class Project {
                 }
                 allBricks.active = true;
                 allBricks.frame.setTitle("All bricks at: " + selectedStore.name);
-                Object[] cols = new Object[]{"Name","Type","Length","Height","Cost Per Brick"};
+                Object[] cols = new Object[]{"Name","Type","Length","Height",
+                                             "Cost Per Brick"};
                 allBricks.addColumns(cols);
                 
                 for (Brick brick : selectedStore.bricks) 
                 {
-                    allBricks.addRow(new Object[] {brick.name, brick.type, brick.length, brick.height, brick.costPerBrick});
+                    allBricks.addRow(new Object[] {brick.name, brick.type, 
+                                brick.length, brick.height, brick.costPerBrick});
                 }
                 allBricks.frame.setVisible(true);
             }     
         }
     }
-    
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Quote Method">
     public static void quote(){
         Table storeBricks = new Table();
         Table finalQuote = new Table();
@@ -166,7 +173,8 @@ public class Project {
         
         while(loop){
             
-            choice = JOptionPane.showInputDialog(null, menu, "Quote Menu", JOptionPane.QUESTION_MESSAGE);
+            choice = JOptionPane.showInputDialog(null, menu, "Quote Menu", 
+                                                 JOptionPane.QUESTION_MESSAGE);
             if(finalQuote.active){
                 finalQuote.frame.setVisible(false);
                 finalQuote.closeTable();
@@ -196,7 +204,8 @@ public class Project {
                     menu();
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null,"Please choose between 1 - 4.");
+                    JOptionPane.showMessageDialog(null,
+                                                "Please choose between 1 - 4.");
                     break;
             }
             if (storeIndex != -1)
@@ -204,7 +213,8 @@ public class Project {
                 String brickType = "";
                 while(loop)
                 {
-                    choice = JOptionPane.showInputDialog("\nWhat type of bricks do you want?"
+                    choice = JOptionPane.showInputDialog("\nWhat type of "
+                                    + "bricks do you want?"
                                     + "\n" + PATTERN1
                                     + "\n1. Brick"
                                     + "\n2. Veneer"
@@ -225,7 +235,8 @@ public class Project {
                             brickType = "Paver";
                             break;
                         default:
-                            JOptionPane.showMessageDialog(null,"Please choose between 1 - 3.");
+                            JOptionPane.showMessageDialog(null,
+                                                "Please choose between 1 - 3.");
                             break;
                     }
                 }
@@ -237,8 +248,10 @@ public class Project {
                 
                 storeBricks.active = true;
                 
-                storeBricks.addColumns(new Object[] {"Id", "Name", "Length", "Height", "Cost Per Brick"});
-                storeBricks.frame.setTitle("All " + brickType + " at " + selectedStore.name);
+                storeBricks.addColumns(new Object[] {"Id", "Name", "Length", 
+                                                    "Height", "Cost Per Brick"});
+                storeBricks.frame.setTitle("All " + brickType + " at " 
+                                            + selectedStore.name);
                 storeBricks.frame.setBounds(100, 100, 710, 500);
                 for(Brick brick : selectedStore.bricks)
                 {                   
@@ -246,26 +259,30 @@ public class Project {
                     {
                         count++;
                         validBricks.add(brick);
-                        storeBricks.addRow(new Object[]{count, brick.name, brick.length, brick.height, brick.costPerBrick});
+                        storeBricks.addRow(new Object[]{count, brick.name, 
+                                brick.length, brick.height, brick.costPerBrick});
                     }
                 }           
                 storeBricks.frame.setVisible(true);
                 
                 boolean brickLoop = true;
                 String brickChoice = "a";
-                // Asking what bricks out of the avaliable bricks the user wants to buy
+                // Asking what bricks out of the avaliable 
+                // bricks the user wants to buy
                 while(brickLoop)
                 {
-                    brickChoice = JOptionPane.showInputDialog("\nWhich " + brickType + " would you like to buy?");
-                    //After input in dialog, it needs another input on the console.
+                    brickChoice = JOptionPane.showInputDialog("\nWhich " 
+                                        + brickType + " would you like to buy?");
                     
                     if(!isNumber(brickChoice))
                     {
                         JOptionPane.showMessageDialog(null,"Please enter a number!");
                     }
-                    else if(Integer.parseInt(brickChoice) < 1 || Integer.parseInt(brickChoice) > validBricks.size())
+                    else if(Integer.parseInt(brickChoice) < 1 
+                         || Integer.parseInt(brickChoice) > validBricks.size())
                     {
-                        JOptionPane.showMessageDialog(null,"Enter a number from 1 to " + validBricks.size() + "!");
+                        JOptionPane.showMessageDialog(null,"Enter a number from 1 to " 
+                                                    + validBricks.size() + "!");
                     }
                     else
                     {
@@ -280,7 +297,9 @@ public class Project {
                 String palletChoice = "a";
                 while(palletLoop)
                 {
-                    palletChoice = JOptionPane.showInputDialog("\nHow many pallets would you like to buy? (Pallet = 100 bricks)");
+                    palletChoice = JOptionPane.showInputDialog("\nHow many "
+                            + "pallets would you like to buy? "
+                            + "(Pallet = 100 bricks)");
                 
                     if(!isNumber(palletChoice))
                     {
@@ -297,425 +316,415 @@ public class Project {
                 finalQuote.active = true;
                 double overage = Math.round(Integer.parseInt(palletChoice) * .10);
                 finalQuote.frame.setTitle("Final Quote");
-                finalQuote.addColumns(new Object[]{"","Store", "Brick", "Pallets", "Cost"});
+                finalQuote.addColumns(new Object[]{"","Store", "Brick", 
+                                                   "Pallets", "Cost"});
                 finalQuote.addRow(new Object[]{"",selectedStore.name, 
-                                  selectedStore.bricks.get(Integer.parseInt(brickChoice)).name, 
-                                  palletChoice, String.format("$%.2f", boughtBrick.getPalletCost(1) )
-                                  });
-                finalQuote.addRow(new Object[]{"Pallets","","","",String.format("$%.2f", boughtBrick.getPalletCost(Integer.parseInt(palletChoice)))});
-                finalQuote.addRow(new Object[]{"10% Overage","","","",String.format("$%.2f", boughtBrick.getPalletCost((int)overage))});
-                finalQuote.addRow(new Object[]{"Total","","","",String.format("$%.2f", boughtBrick.getPalletCost(Integer.parseInt(palletChoice) + (int)overage))});
+                    selectedStore.bricks.get(Integer.parseInt(brickChoice)).name, 
+                    palletChoice, String.format("$%.2f", boughtBrick.getPalletCost(1))
+                    });
+                finalQuote.addRow(new Object[]{"Pallets","","","",String.format("$%.2f",
+                        boughtBrick.getPalletCost(Integer.parseInt(palletChoice)))});
+                finalQuote.addRow(new Object[]{"10% Overage","","","",String.format("$%.2f",
+                        boughtBrick.getPalletCost((int)overage))});
+                finalQuote.addRow(new Object[]{"Total","","","",String.format("$%.2f",
+                        boughtBrick.getPalletCost(Integer.parseInt(palletChoice) + (int)overage))});
                 finalQuote.frame.setVisible(true);
               
                 loop = true;
             }
         }
     }
-    
-    // TODO - Calculate how much it would cost to replace all bricks around
-    // the school walls.
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Real Method">
     public static void real(){
-        Scanner scnr = new Scanner(System.in);
-        String choices;
-        String answer;
-        String menu = "Where would you like to get your order from?"
-                    + "\n1. Lowes"
-                    + "\n2. Home Depot"
-                    + "\n3. The Buildclub"
-                    + "\n4. Main Menu";
         //Brick customerBricks;
         Purchase cart = new Purchase();
         getCustomerName();
         cart.customerName = customerName;
+        Table storeBricks = new Table();
+        Scanner scnr = new Scanner(System.in);
+        boolean loop = true;
+        int storeIndex = -1;
+        String choices;
+        String answer;
+        String menu = "Where would you like to get your order from?"
+                    + "\n1. Home Depot"
+                    + "\n2. Lowes"
+                    + "\n3. The Buildclub"
+                    + "\n4. Main Menu";
         
-        choices = JOptionPane.showInputDialog(null, menu, "Store Picker", JOptionPane.QUESTION_MESSAGE);
-        if(choices == null)
+        
+        
+        while(loop)
         {
-            exitDialog();
-            real();
+            choices = JOptionPane.showInputDialog(null, menu, "Store Picker",
+                    JOptionPane.QUESTION_MESSAGE);
+            if(choices == null)
+            {
+                exitDialog();
+                real();
+            }
+            
+            switch(choices)
+            {
+                case "1":
+                    loop = false;
+                    storeIndex = 0;
+                    break;
+                case "2":
+                    loop = false;
+                    storeIndex = 1;
+                    break;
+                case "3":
+                    loop = false;
+                    storeIndex = 2;
+                    break;
+                case "4":
+                    loop = false;
+                    menu();
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null,"Please choose 1-4");
+                    break;
+            }
         }
-        //choices = scnr.next();
-        switch(choices)
+        
+        loop = true;
+        String brickIndex = "";
+        while(loop)
         {
-            case "1":
-                JOptionPane.showMessageDialog(null,"You have chosen Lowes for your order");
-                //customerBricks = LOWES;
-                answer = JOptionPane.showInputDialog(""
+            switch(answer = JOptionPane.showInputDialog(""
                         + "What would you like to order"
                         + "\n1. Bricks"
                         + "\n2. Veneers"
                         + "\n3. Pavers"
-                        + "\n4. Go back");
-                
-                switch(answer)
-                {
-                    case "1":
-                        JOptionPane.showMessageDialog(null,""
-                                + "You have chosen bricks\n");
-                        
-                        // Prints stores brick selection, gets user's choice and adds to cart
-                        STORES.get(1).printBrickByType("Brick");
-                        STORES.get(1).getBrickSelectionInput(cart, "Brick");
-                        // Gets number of bricks needed and adds to cart
-                        cart.quantity = getBricksNeeded(cart.brick);
-                        // Displays receipt and prints to file
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
-                        cart.printReceipt();
-                        break;
-                    case "2":
-                        JOptionPane.showMessageDialog(null,"You have chosen veeners");
-                        STORES.get(1).printBrickByType("Veneer");
-                        STORES.get(1).getBrickSelectionInput(cart, "Veneer");
-                        cart.quantity = getBricksNeeded(cart.brick);
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
-                        cart.printReceipt();
-                        break;
-                        
-                    case "3":
-                        JOptionPane.showMessageDialog(null,"You have chosen pavers");
-                        STORES.get(1).printBrickByType("Paver");
-                        STORES.get(1).getBrickSelectionInput(cart, "Paver");
-                        cart.quantity = getBricksNeeded(cart.brick);
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
-                        cart.printReceipt();
-                        break;
-                    case "4":
-                        real();
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case "2":
-                JOptionPane.showMessageDialog(null,"You have chosen Home Depot for your order");
-                //customerBricks = HOME;
-                answer = JOptionPane.showInputDialog(""
-                        + "What would you like to order"
-                        + "\n1. Bricks"
-                        + "\n2. Veneers"
-                        + "\n3. Pavers"
-                        + "\n4. Go back");
-                
-                 switch(answer)
-                {
-                    case "1":
-                        JOptionPane.showMessageDialog(null,""
-                                + "You have chosen bricks");
-                        // Prints stores brick selection, gets user's choice and adds to cart
-                        STORES.get(0).printBrickByType("Brick");
-                        STORES.get(0).getBrickSelectionInput(cart, "Brick");
-                            
-                        // Gets number of bricks needed and adds to cart
-                        cart.quantity = getBricksNeeded(cart.brick);
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
-                        cart.printReceipt();
-                        break;
-                    case "2":
-                        JOptionPane.showMessageDialog(null,"You have chosen veeners");
-                        STORES.get(0).printBrickByType("Veneer");
-                        STORES.get(0).getBrickSelectionInput(cart, "Veneer");
-                        cart.quantity = getBricksNeeded(cart.brick);
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
-                        cart.printReceipt();
-                        break;
-                    case "3":
-                        JOptionPane.showMessageDialog(null,"You have chosen pavers");
-                        STORES.get(0).printBrickByType("Paver");
-                        STORES.get(0).getBrickSelectionInput(cart, "Paver");
-                        cart.quantity = getBricksNeeded(cart.brick);
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
-                        cart.printReceipt();
-                        break;
-                    case "4":
-                        real();
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case "3":
-                JOptionPane.showMessageDialog(null,"You have chosen The Buildclub for your brick order");
-                //customerBricks = BUILD;
-                answer = JOptionPane.showInputDialog(""
-                        + "What would you like to order"
-                        + "\n1. Bricks"
-                        + "\n2. Veneers"
-                        + "\n3. Pavers"
-                        + "\n4. Go back");
-                
-                 switch(answer)
-              {
-                    case "1":
-                        JOptionPane.showMessageDialog(null,""
-                                + "You have chosen bricks");
-                        STORES.get(2).printBrickByType("Brick");
-                        STORES.get(2).getBrickSelectionInput(cart, "Brick");
-                        cart.quantity = getBricksNeeded(cart.brick);
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
-                        cart.printReceipt();
-                        break;
-                    case "2":
-                        JOptionPane.showMessageDialog(null,"You have chosen veeners");
-                        STORES.get(2).printBrickByType("Veneer");
-                        STORES.get(2).getBrickSelectionInput(cart, "Veneer");
-                        cart.quantity = getBricksNeeded(cart.brick);
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
-                        cart.printReceipt();
-                        break;
-                    case "3":
-                        JOptionPane.showMessageDialog(null,"You have chosen pavers");
-                        STORES.get(2).printBrickByType("Paver");
-                        STORES.get(2).getBrickSelectionInput(cart, "Paver");
-                        cart.quantity = getBricksNeeded(cart.brick);
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
-                        cart.printReceipt();
-                        break;
-                    case "4":
-                        real();
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case "4":
-                menu();
-                break;
-            default:
-                JOptionPane.showMessageDialog(null,"Please choose 1-4");
-                break;
+                        + "\n4. Go back"))
+            {
+                case "1":
+                    loop = false;
+                    brickIndex = "Brick";
+                    break;
+                case "2":
+                    loop = false;
+                    brickIndex = "Veneer";
+                    break;
+                case "3":
+                    loop = false;
+                    brickIndex = "Paver";
+                    break;
+                case "4":
+                    loop = false;
+                    real();
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null,"Please choose 1-4");
+                    break;         
+            }
+        }       
+        
+        // Showing user all avaiable bricks from their selected store
+        List<Brick> validBricks = new ArrayList<>();
+        int count = 0;
+        BrickStore selectedStore = STORES.get(storeIndex);
+
+        storeBricks.active = true;
+
+        storeBricks.addColumns(new Object[] {"Id", "Name", "Length", 
+                                            "Height", "Cost Per Brick"});
+        storeBricks.frame.setTitle("All " + brickIndex + " at " 
+                                    + selectedStore.name);
+        storeBricks.frame.setBounds(100, 100, 710, 500);
+        for(Brick brick : selectedStore.bricks)
+        {                   
+            if(brick.type.equals(brickIndex))
+            {
+                count++;
+                validBricks.add(brick);
+                storeBricks.addRow(new Object[]{count, brick.name, 
+                        brick.length, brick.height, brick.costPerBrick});
+            }
+        }           
+        storeBricks.frame.setVisible(true);
+
+        boolean brickLoop = true;
+        String brickChoice = "a";
+        // Asking what bricks out of the avaliable 
+        // bricks the user wants to buy
+        while(brickLoop)
+        {
+            brickChoice = JOptionPane.showInputDialog("\nWhich " 
+                                + brickIndex + " would you like to buy?");
+
+            if(!isNumber(brickChoice))
+            {
+                JOptionPane.showMessageDialog(null,"Please enter a number!");
+            }
+            else if(Integer.parseInt(brickChoice) < 1 
+                 || Integer.parseInt(brickChoice) > validBricks.size())
+            {
+                JOptionPane.showMessageDialog(null,"Enter a number from 1 to " 
+                                            + validBricks.size() + "!");
+            }
+            else
+            {
+                brickLoop = false;
+            }
         }
-         
-    }   
+        storeBricks.frame.dispose();
+        cart.brick = validBricks.get(Integer.parseInt(brickChoice) - 1);
+        cart.quantity = getBricksNeeded(cart.brick);
+        JOptionPane.showMessageDialog(null,cart.createReceipt());
+        cart.printReceipt();
+        real();
+                
+    }
+       
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Custom Orders">
     public static void customOrders()
     {
         Scanner scnr = new Scanner(System.in);
+        Table storeBricks = new Table();
         String choices;
         String answer;
+        int storeIndex = -1;
         int windows;
+        double windowSqInches;
         int doors;
-        int wall;
+        double doorWidth;
+        double doorHeight;
+        double doorSqInches;
+        double wallLength;
+        double wallHeight;
+        double wallSqInches;
         int total;
+        boolean loop = true;
         String menu = "Where would you like to get your order from?"
                     + "\n1. Lowes"
                     + "\n2. Home Depot"
                     + "\n3. The Buildclub"
                     + "\n4. Main Menu";
-        //Brick customerBricks;
-        Purchase cart = new Purchase();
-        getCustomerName();
-        cart.customerName = customerName;
+        while(loop)
+        {
+            //Brick customerBricks;
+            Purchase cart = new Purchase();
+            getCustomerName();
+            cart.customerName = customerName;
 
-        choices = JOptionPane.showInputDialog(null, menu, "Store Picker", JOptionPane.QUESTION_MESSAGE);
-        if(choices == null)
-        {
-            exitDialog();
-            real();
-        }
-        switch(choices)
-        {
-            case "1":
-                JOptionPane.showMessageDialog(null,"You have chosen Lowes for your order");
-                //customerBricks = LOWES;
-                answer = JOptionPane.showInputDialog(""
-                        + "What would you like to order"
-                        + "\n1. Bricks"
-                        + "\n2. Veneers"
-                        + "\n3. Pavers"
-                        + "\n4. Go back");
-                switch (answer)
+            while (loop)
+            {
+                choices = JOptionPane.showInputDialog(null, menu, "Store Picker", 
+                                                      JOptionPane.QUESTION_MESSAGE); 
+                if(choices == null)
                 {
-                    case "1":
-                        JOptionPane.showMessageDialog(null,""
-                                + "You have chosen bricks\n");
-                        STORES.get(1).printBrickByType("Brick");
-                        STORES.get(1).getBrickSelectionInput(cart, "Brick");
-                        // put after choice 
-                        wall = Integer.parseInt(JOptionPane.showInputDialog("What is the measurement of the wall?"));
-                        doors = Integer.parseInt(JOptionPane.showInputDialog("How many doors?"));
-                        windows = Integer.parseInt(JOptionPane.showInputDialog("How many windows?"));
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
-                        break;
-                    case "2":
-                        JOptionPane.showMessageDialog(null,"You have chosen veeners");
-                        STORES.get(1).printBrickByType("Veneer");
-                        STORES.get(1).getBrickSelectionInput(cart, "Veneer");
-                        // put after choice 
-                        wall = Integer.parseInt(JOptionPane.showInputDialog("What is the measurement of the wall?"));
-                        doors = Integer.parseInt(JOptionPane.showInputDialog("How many doors?"));
-                        windows = Integer.parseInt(JOptionPane.showInputDialog("How many windows?"));
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
-                        break;
-                    case "3":
-                        JOptionPane.showMessageDialog(null,"You have chosen pavers");
-                        STORES.get(1).printBrickByType("Paver");
-                        STORES.get(1).getBrickSelectionInput(cart, "Paver");
-                        // put after choice 
-                        wall = Integer.parseInt(JOptionPane.showInputDialog("What is the measurement of the wall?"));
-                        doors = Integer.parseInt(JOptionPane.showInputDialog("How many doors?"));
-                        windows = Integer.parseInt(JOptionPane.showInputDialog("How many windows?"));
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
-                        break;
-                        case "4":
-                        customOrders();
-                        break;
-                    default:
-                        break;
+                    exitDialog();
+                    customOrders();
                 }
-                break;
-                //needs more infor
-                case "2":
-                JOptionPane.showMessageDialog(null,"You have chosen Home Depot for your order");
-                //customerBricks = HOME;
-                answer = JOptionPane.showInputDialog(""
-                        + "What would you like to order"
-                        + "\n1. Bricks"
-                        + "\n2. Veneers"
-                        + "\n3. Pavers"
-                        + "\n4. Go back");  
-                switch(answer)
+
+                switch(choices)
                 {
                     case "1":
-                        JOptionPane.showMessageDialog(null,""
-                                + "You have chosen bricks");
-                        STORES.get(0).printBrickByType("Brick");
-                        STORES.get(0).getBrickSelectionInput(cart, "Brick");
-                        // put after choice 
-                        wall = Integer.parseInt(JOptionPane.showInputDialog("What is the measurement of the wall?"));
-                        doors = Integer.parseInt(JOptionPane.showInputDialog("How many doors?"));
-                        windows = Integer.parseInt(JOptionPane.showInputDialog("How many windows?"));
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
+                        loop = false;
+                        storeIndex = 0;
                         break;
                     case "2":
-                        JOptionPane.showMessageDialog(null,"You have chosen veeners");
-                        STORES.get(0).printBrickByType("Veneer");
-                        STORES.get(0).getBrickSelectionInput(cart, "Veneer");
-                         // put after choice 
-                        wall = Integer.parseInt(JOptionPane.showInputDialog("What is the measurement of the wall?"));
-                        doors = Integer.parseInt(JOptionPane.showInputDialog("How many doors?"));
-                        windows = Integer.parseInt(JOptionPane.showInputDialog("How many windows?"));
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
+                        loop = false;
+                        storeIndex = 1;
                         break;
                     case "3":
-                        JOptionPane.showMessageDialog(null,"You have chosen pavers");
-                        STORES.get(0).printBrickByType("Paver");
-                        STORES.get(0).getBrickSelectionInput(cart, "Paver");
-                         // put after choice 
-                        wall = Integer.parseInt(JOptionPane.showInputDialog("What is the measurement of the wall?"));
-                        doors = Integer.parseInt(JOptionPane.showInputDialog("How many doors?"));
-                        windows = Integer.parseInt(JOptionPane.showInputDialog("How many windows?"));
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
+                        loop = false;
+                        storeIndex = 2;
                         break;
                     case "4":
-                        customOrders();
+                        loop = false;
+                        menu();
                         break;
                     default:
+                        JOptionPane.showMessageDialog(null,"Please choose 1-4");
                         break;
-
                 }
-                //needs more info
-                case "3":
-                JOptionPane.showMessageDialog(null,"You have chosen The Buildclub for your brick order");
-                //customerBricks = BUILD;
-                answer = JOptionPane.showInputDialog(""
-                        + "What would you like to order"
-                        + "\n1. Bricks"
-                        + "\n2. Veneers"
-                        + "\n3. Pavers"
-                        + "\n4. Go back");
-                switch(answer)
-                {
+            }
 
+            loop = true;
+            String brickIndex = "";
+            while(loop)
+            {
+                switch(answer = JOptionPane.showInputDialog(""
+                            + "What would you like to order"
+                            + "\n1. Bricks"
+                            + "\n2. Veneers"
+                            + "\n3. Pavers"
+                            + "\n4. Go back"))
+                {
                     case "1":
-                        JOptionPane.showMessageDialog(null,""
-                                + "You have chosen bricks");
-                        STORES.get(2).printBrickByType("Brick");
-                        STORES.get(2).getBrickSelectionInput(cart, "Brick");
-                         // put after choice 
-                        wall = Integer.parseInt(JOptionPane.showInputDialog("What is the measurement of the wall?"));
-                        doors = Integer.parseInt(JOptionPane.showInputDialog("How many doors?"));
-                        windows = Integer.parseInt(JOptionPane.showInputDialog("How many windows?"));
-                        //cart.quantity = getBricksNeeded(cart.brick);
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
-                        cart.printReceipt();
+                        loop = false;
+                        brickIndex = "Brick";
                         break;
                     case "2":
-                        JOptionPane.showMessageDialog(null,"You have chosen veeners");
-                        STORES.get(2).printBrickByType("Veneer");
-                        STORES.get(2).getBrickSelectionInput(cart, "Veneer");
-                        //put after choice
-                        wall = Integer.parseInt(JOptionPane.showInputDialog("What is the measurement of the wall?"));
-                        doors = Integer.parseInt(JOptionPane.showInputDialog("How many doors?"));
-                        windows = Integer.parseInt(JOptionPane.showInputDialog("How many windows?"));
-                        //cart.quantity = getBricksNeeded(cart.brick);
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
-                        cart.printReceipt();
+                        loop = false;
+                        brickIndex = "Veneer";
                         break;
                     case "3":
-                        JOptionPane.showMessageDialog(null,"You have chosen pavers");
-                        STORES.get(2).printBrickByType("Paver");
-                        STORES.get(2).getBrickSelectionInput(cart, "Paver");
-                        // put after choice
-                        wall = Integer.parseInt(JOptionPane.showInputDialog("What is the measurement of the wall?"));
-                        doors = Integer.parseInt(JOptionPane.showInputDialog("How many doors?"));
-                        windows = Integer.parseInt(JOptionPane.showInputDialog("How many windows?"));
-                        //cart.quantity = getBricksNeeded(cart.brick);
-                        JOptionPane.showMessageDialog(null,cart.createReceipt());
-                        cart.printReceipt();
+                        loop = false;
+                        brickIndex = "Paver";
                         break;
                     case "4":
-                        customOrders();
+                        loop = false;
+                        real();
                         break;
                     default:
-                        break;
+                        JOptionPane.showMessageDialog(null,"Please choose 1-4");
+                        break;         
                 }
-                break;
-            case "4":
-                menu();
-                break;
-            default:
-                JOptionPane.showMessageDialog(null,"Please choose 1-4");
-                break;
+            }       
+
+            // Showing user all avaiable bricks from their selected store
+            List<Brick> validBricks = new ArrayList<>();
+            int count = 0;
+            BrickStore selectedStore = STORES.get(storeIndex);
+            storeBricks.active = true;
+            storeBricks.addColumns(new Object[] {"Id", "Name", "Length", 
+                                                "Height", "Cost Per Brick"});
+            storeBricks.frame.setTitle("All " + brickIndex + " at " 
+                                        + selectedStore.name);
+            storeBricks.frame.setBounds(100, 100, 710, 500);
+            for(Brick brick : selectedStore.bricks)
+            {                   
+                if(brick.type.equals(brickIndex))
+                {
+                    count++;
+                    validBricks.add(brick);
+                    storeBricks.addRow(new Object[]{count, brick.name, 
+                            brick.length, brick.height, brick.costPerBrick});
+                }
+            }           
+            storeBricks.frame.setVisible(true);
+
+            boolean brickLoop = true;
+            String brickChoice = "a";
+            // Asking what bricks out of the avaliable 
+            // bricks the user wants to buy
+            while(brickLoop)
+            {
+                brickChoice = JOptionPane.showInputDialog("\nWhich " 
+                                    + brickIndex + " would you like to buy?");
+
+                if(!isNumber(brickChoice))
+                {
+                    JOptionPane.showMessageDialog(null,"Please enter a number!");
+                }
+                else if(Integer.parseInt(brickChoice) < 1 
+                     || Integer.parseInt(brickChoice) > validBricks.size())
+                {
+                    JOptionPane.showMessageDialog(null,"Enter a number from 1 to " 
+                                                + validBricks.size() + "!");
+                }
+                else
+                {
+                    brickLoop = false;
+                }
+            }
+            storeBricks.frame.dispose();
+            cart.brick = validBricks.get(Integer.parseInt(brickChoice) - 1);
+            //WallLength
+            String temp = "";
+            while (!isNumber(temp))
+            {
+                temp = JOptionPane.showInputDialog("What is the length of your wall "
+                        + "in inches?");
+                if (!isNumber(temp))
+                {
+                    JOptionPane.showMessageDialog(null, "Input a number!");
+                }
+            }
+            wallLength = Double.parseDouble(temp);
+            //WallHeight
+            temp = "";
+            while (!isNumber(temp))
+            {
+                temp = JOptionPane.showInputDialog("What is the height of your wall "
+                        + "in inches?");
+                if (!isNumber(temp))
+                {
+                    JOptionPane.showMessageDialog(null, "Input a number!");
+                }
+            }
+            wallHeight = Double.parseDouble(temp);
+            //Doors
+            temp = "";
+            while (!isInteger(temp))
+            {
+                temp = JOptionPane.showInputDialog("How many doors do you need?");
+                if (!isInteger(temp))
+                {
+                    JOptionPane.showMessageDialog(null, "Input a whole number!");
+                }
+            }
+            doors = Integer.parseInt(temp);
+            //Doors Width
+            temp = "";
+            while (!isNumber(temp))
+            {
+                temp = JOptionPane.showInputDialog("What is the width of the "
+                        + "doors in inches?");
+                if (!isNumber(temp))
+                {
+                    JOptionPane.showMessageDialog(null, "Input a number!");
+                }
+            }
+            doorWidth = Double.parseDouble(temp);
+            //Doors Height
+            temp = "";
+            while (!isNumber(temp))
+            {
+                temp = JOptionPane.showInputDialog("What is the height of the "
+                        + "doors in inches?");
+                if (!isNumber(temp))
+                {
+                    JOptionPane.showMessageDialog(null, "Input a number!");
+                }
+            }
+            doorHeight = Double.parseDouble(temp);
+            //Door Sq Inches
+            doorSqInches = doors * (doorWidth * doorHeight);
+            //Windows
+            temp = "";
+            while (!isInteger(temp))
+            {
+                temp = JOptionPane.showInputDialog("How many windows will be installed?");
+                if (!isInteger(temp))
+                {
+                    JOptionPane.showMessageDialog(null, "Input a whole number!");
+                }
+            }
+            windows = Integer.parseInt(temp);
+            //Window Sq Inches
+            windowSqInches = windows * (24 * 36);
+            //Wall Sq Inches
+            wallSqInches = ((wallLength * wallHeight)- doorSqInches) - windowSqInches;
+            cart.quantity = getBricksNeededCustom(cart.brick, wallSqInches);
+            JOptionPane.showMessageDialog(null,cart.createReceipt());
+            cart.printReceipt();
+            loop = true;
         }
-        // copy and paste brick, veneer, and pavers
-        
-        //copy and paste selections
-        // ask for wall measurements
-        // add how many doors (double doors count as two doors)
-        //ask how many windows (use standard size windows 24X36)
-        // add doors and windows then use wall measurements to subtract
-        //multiply with selection
-        //print receipt
-    }
+    }// </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Methods">
     public static void getCustomerName()
     {
         Scanner keyboard = new Scanner(System.in);
-        customerName = JOptionPane.showInputDialog("Hello, please enter your name: ");
-        
-    }
-    // Takes a name and cost of a single brick as input, and 
-    // displays the cost of a pallet for that company.
-    public static void calculatePalletCost(String name, double brickCost){
-        double total;
-        int pallet;
-        Scanner scnr = new Scanner(System.in);
-        final int PER = 100;
-        
-        System.out.printf("\nYou have chosen %s for your bricks.\n", name);
-        System.out.println("How many pallets do you need?");
-        
-        //TODO - Validate to make sure user inputs int, crashes if anything 
-        //else is inputted.
-        pallet = scnr.nextInt();
-        
-        System.out.println();
-        System.out.println("You entered " + pallet + " pallet(s).");
-        
-        total=brickCost*PER*pallet;
-        
-        System.out.println(PATTERN1); 
-        System.out.printf("Your quote is $%.2f", total);
-        System.out.println("."); 
-        System.out.println(PATTERN1); 
+        if(customerName.equals(""))
+        {
+            while (customerName.equals(""))
+            {
+                customerName = JOptionPane.showInputDialog("Hello, please "
+                                                        + "enter your name: ");
+                if (customerName.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null,"Name can not be empty");
+                }
+            }     
+        }      
     }
     
     // Gets the number of bricksNeeded for school
@@ -725,16 +734,26 @@ public class Project {
         double standardPatternHeight = 80;
         double wallsInInches = 2813; 
         
-        double normalPatternBricks = (wallsInInches * standardPatternHeight) / ((brick.length + .5) * (brick.height+.5));
-        double bricksNeeded = normalPatternBricks + (wallsInInches * patternHeight) / ((brick.length + .5) * (brick.width + .5));
-        double overage = bricksNeeded * .1;
+        double normalPatternBricks = (wallsInInches * standardPatternHeight)
+                / ((brick.length + .5) * (brick.height+.5));
+        double bricksNeeded = normalPatternBricks + ((wallsInInches * patternHeight)
+                / ((brick.height + .5) * (brick.length + .5)));
+        double overage = bricksNeeded * 0.1;
         
-        
-        JOptionPane.showMessageDialog(null,"You will need " + (bricksNeeded + overage) 
+        JOptionPane.showMessageDialog(null,"You will need " + (int)(bricksNeeded + overage) 
                 + " bricks for the project, including 10% overage for damaged bricks.");
         return (int)(overage + bricksNeeded);
     }
-   
+    
+   // Bricks needed for customorder
+   public static Integer getBricksNeededCustom(Brick brick, double wallSqInches)
+   {
+       double bricks =  wallSqInches  / ((brick.length + .5) *
+               (brick.height + .5));
+       bricks = bricks + (bricks * .1);
+       return (int)bricks;
+   }
+    
     // Make a list of all the stores and their bricks for global use though
     // out the program
     public static List<BrickStore> createStores() // length height width cost
@@ -779,6 +798,20 @@ public class Project {
     {
         try
         {
+            double t = Double.parseDouble(number);
+            return true;
+        }
+        catch(Exception ex)
+        {
+            return false;
+        }
+    }
+    
+    // Needed for some switch statement checks
+    public static boolean isInteger(String number)
+    {
+        try
+        {
             int t = Integer.parseInt(number);
             return true;
         }
@@ -791,10 +824,12 @@ public class Project {
     // JOptionPane - used to verify exit
     public static void exitDialog()
     {
-        int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Exit?", JOptionPane.YES_NO_OPTION);
+        int choice = JOptionPane.showConfirmDialog(null,
+                "Are you sure you want to exit?", "Exit?", JOptionPane.YES_NO_OPTION);
         if(choice == JOptionPane.YES_OPTION)
         {
             System.exit(0);
         }
     }
+    // </editor-fold>
 }

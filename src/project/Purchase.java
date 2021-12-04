@@ -1,5 +1,6 @@
 package project;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
@@ -40,9 +41,17 @@ public class Purchase {
         
         try
         {
-            PrintWriter writer = new PrintWriter(customerName + "Bill.txt");
-            writer.print(createReceipt());
-            writer.close();
+            for(int i = 0; i < 10; i++)
+            {
+                File f = new File(customerName + "(" + i + ")Bill.txt");
+                if (!f.exists())
+                {
+                    PrintWriter writer = new PrintWriter(customerName + "(" + i + ")Bill.txt");
+                    writer.print(createReceipt());
+                    writer.close();
+                    break;
+                }
+            }
         }
         catch(FileNotFoundException ex)
         {
