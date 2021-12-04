@@ -484,7 +484,6 @@ public class Project {
     public static void customOrders()
     {
         Scanner scnr = new Scanner(System.in);
-        Table storeBricks = new Table();
         String choices;
         String answer;
         int storeIndex = -1;
@@ -506,6 +505,7 @@ public class Project {
                     + "\n4. Main Menu";
         while(loop)
         {
+            Table storeBricks = new Table();
             //Brick customerBricks;
             Purchase cart = new Purchase();
             getCustomerName();
