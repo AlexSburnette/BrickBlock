@@ -66,19 +66,19 @@ public class Purchase {
     // Creates the receipt
     public String createReceipt()
     {
-        DecimalFormat format = new DecimalFormat("$#,###.00");
+        DecimalFormat format = new DecimalFormat("$#,##0.00");
         purchaseTotal = quantity * brick.costPerBrick;
         double tax = purchaseTotal * TAX_RATE;
         
         String bill = "Bill for " + customerName + "\n"
                 + "==============================" + "\n"
                 + brick.name + " " + brick.type + " " + brick.length + "x" + brick.height
-                + "\nx " + quantity + " @ " + format.format(brick.costPerBrick) + "\n"
+                + "\nx " + Math.abs(quantity) + " @ " + format.format(brick.costPerBrick) + "\n"
                 + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + "\n"
-                + "Subtotal: " + format.format(purchaseTotal) +"\n"
-                + "Tax: " + format.format(tax) + "\n"
+                + "Subtotal: " + format.format(Math.abs(purchaseTotal)) +"\n"
+                + "Tax: " + format.format(Math.abs(tax)) + "\n"
                 + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + "\n"
-                + "Total: " + format.format(tax + purchaseTotal);
+                + "Total: " + format.format(Math.abs(tax + purchaseTotal));
         return bill;
     }
      

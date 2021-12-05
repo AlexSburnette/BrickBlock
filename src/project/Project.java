@@ -393,12 +393,19 @@ public class Project {
         String brickIndex = "";
         while(loop)
         {
-            switch(answer = JOptionPane.showInputDialog(""
+            answer = JOptionPane.showInputDialog(""
                         + "What would you like to order"
                         + "\n1. Bricks"
                         + "\n2. Veneers"
                         + "\n3. Pavers"
-                        + "\n4. Go back"))
+                        + "\n4. Go back");
+            if(answer == null)
+            {
+                exitDialog();
+                real();
+            }
+            switch(answer)
+                
             {
                 case "1":
                     loop = false;
@@ -452,7 +459,7 @@ public class Project {
         // bricks the user wants to buy
         while(brickLoop)
         {
-            brickChoice = JOptionPane.showInputDialog("\nWhich " 
+            brickChoice = JOptionPane.showInputDialog("Which " 
                                 + brickIndex + " would you like to buy?");
 
             if(!isNumber(brickChoice))
@@ -549,12 +556,17 @@ public class Project {
             String brickIndex = "";
             while(loop)
             {
-                switch(answer = JOptionPane.showInputDialog(""
+                answer = JOptionPane.showInputDialog(""
                             + "What would you like to order"
                             + "\n1. Bricks"
                             + "\n2. Veneers"
                             + "\n3. Pavers"
-                            + "\n4. Go back"))
+                            + "\n4. Go back");
+                if(answer == null){
+                    exitDialog();
+                    customOrders();
+                }
+                switch(answer)
                 {
                     case "1":
                         loop = false;
